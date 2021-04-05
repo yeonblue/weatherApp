@@ -12,21 +12,21 @@ import SwiftyJSON
 class CurrentWeather {
     
     // MARK: - Vars
-    var city: String?
-    var date: Date?
-    var currentTemperature: Double?
-    var feelsLikeTemperature: Double?
-    var uvIndex: Double? // Ultraviolet index - 햇볕을 쬐는 자외선의 강도를 측정하는 국제 표준
+    var city: String!
+    var date: Date!
+    var currentTemperature: Double!
+    var feelsLikeTemperature: Double!
+    var uvIndex: Double! // Ultraviolet index - 햇볕을 쬐는 자외선의 강도를 측정하는 국제 표준
     
-    var weatherType: String?
-    var pressure: Double? // 기압 밀리파스칼 (mpa)
-    var humidity: Double? // %
-    var windSpeed: Double? // m/s
+    var weatherType: String!
+    var pressure: Double! // 기압 밀리파스칼 (mpa)
+    var humidity: Double! // %
+    var windSpeed: Double! // m/s
     var weatherIcon: String?
     
-    var visibility: Double? // in KM
-    var sunrise: String?
-    var sunset: String? // 일출 시간
+    var visibility: Double! // in KM
+    var sunrise: String!
+    var sunset: String! // 일출 시간
     
     // MARK: - Functions
     func getCurrentWeather(completion: @escaping(Bool) -> Void) {
