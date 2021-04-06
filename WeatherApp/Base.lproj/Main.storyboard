@@ -1,24 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Weather View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="WeatherViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baB-T5-JKn">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="QwN-BO-2xK"/>
+                                    <barButtonItem style="plain" id="Myk-34-JKI">
+                                        <pageControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" id="tOt-eb-kWo">
+                                            <rect key="frame" x="145.5" y="13" width="123" height="28"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="pageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="currentPageIndicatorTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </pageControl>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="LLa-x8-lZ9"/>
+                                    <barButtonItem systemItem="add" id="cLZ-KN-oFc">
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhs-0S-aTb">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nG-ao-vOw">
+                                        <rect key="frame" x="0.0" y="0.0" width="415" height="769"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="9nG-ao-vOw" firstAttribute="leading" secondItem="xhs-0S-aTb" secondAttribute="leading" id="5tu-Gc-Ior"/>
+                                    <constraint firstItem="9nG-ao-vOw" firstAttribute="height" secondItem="BnI-qf-uST" secondAttribute="height" id="6zM-7A-3jX"/>
+                                    <constraint firstAttribute="bottom" secondItem="9nG-ao-vOw" secondAttribute="bottom" id="CEd-fs-FD6"/>
+                                    <constraint firstItem="9nG-ao-vOw" firstAttribute="width" secondItem="BnI-qf-uST" secondAttribute="width" constant="1" id="fE4-xt-kPN"/>
+                                    <constraint firstItem="9nG-ao-vOw" firstAttribute="top" secondItem="xhs-0S-aTb" secondAttribute="top" id="gko-Dv-qm5"/>
+                                    <constraint firstAttribute="trailing" secondItem="9nG-ao-vOw" secondAttribute="trailing" id="iY5-eo-YFT"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="JTn-SA-EoN"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="BnI-qf-uST"/>
+                            </scrollView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="baB-T5-JKn" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="1H6-09-2Xf"/>
+                            <constraint firstItem="baB-T5-JKn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Che-NB-0yS"/>
+                            <constraint firstItem="baB-T5-JKn" firstAttribute="top" secondItem="xhs-0S-aTb" secondAttribute="bottom" id="UJA-8n-Evt"/>
+                            <constraint firstItem="baB-T5-JKn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Y4f-Ix-Y3l"/>
+                            <constraint firstItem="xhs-0S-aTb" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="onh-Fw-ztq"/>
+                            <constraint firstItem="xhs-0S-aTb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="yqr-nV-q4h"/>
+                            <constraint firstItem="xhs-0S-aTb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zEc-B5-NCh"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="addWeatherButton" destination="cLZ-KN-oFc" id="jhw-3L-Dua"/>
+                        <outlet property="weatherPageControl" destination="tOt-eb-kWo" id="w4F-QB-5Iz"/>
+                        <outlet property="weatherScrollView" destination="xhs-0S-aTb" id="qIS-Q2-NpI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="99.776785714285708"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
