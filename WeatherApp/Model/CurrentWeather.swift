@@ -22,7 +22,7 @@ class CurrentWeather {
     var pressure: Double! // 기압 밀리파스칼 (mpa)
     var humidity: Double! // %
     var windSpeed: Double! // m/s
-    var weatherIcon: String?
+    var weatherIcon: String!
     
     var visibility: Double! // in KM
     var sunrise: String!
