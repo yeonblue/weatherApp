@@ -28,4 +28,8 @@ class WeatherViewController: UIViewController {
         
         weatherView.currentWeather = CurrentWeather()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 }

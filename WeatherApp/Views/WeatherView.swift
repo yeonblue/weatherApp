@@ -42,12 +42,13 @@ class WeatherView: UIView {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        mainInit()
     }
     
     private func mainInit() {
         Bundle.main.loadNibNamed("WeatherView", owner: self, options: nil)
         addSubview(mainView)
-        mainView.frame = self.frame
+        mainView.frame = self.bounds
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         setupTableView()
