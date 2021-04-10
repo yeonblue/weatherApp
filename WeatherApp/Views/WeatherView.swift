@@ -15,7 +15,7 @@ class WeatherView: UIView {
 
     // MARK: - IBOultet
 
-    @IBOutlet var mainView: UIView!
+    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -40,17 +40,17 @@ class WeatherView: UIView {
     
     var weeklyWeatherForecastData = [WeeklyWeather]() {
         didSet{
-            
+            self.bottomTableView.reloadData()
         }
     }
     var dailyWeatherForcastData = [HourlyWeather]() {
         didSet{
-            
+            self.hourlyWeatherCollectionView.reloadData()
         }
     }
     var weatherInfoData = [WeatherInfo]() {
         didSet{
-            
+            self.infoCollectionView.reloadData()
         }
     }
     
@@ -60,12 +60,13 @@ class WeatherView: UIView {
         mainInit()
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         mainInit()
     }
     
-    private func mainInit() {
+    func mainInit() {
+
         Bundle.main.loadNibNamed("WeatherView", owner: self, options: nil)
         addSubview(mainView)
         mainView.frame = self.bounds
@@ -79,8 +80,7 @@ class WeatherView: UIView {
     // MARK: - Helpers
     private func setupTableView() {
         bottomTableView.register(UINib(nibName: "WeatherTableViewCell", bundle: Bundle.main),
-                                 forHeaderFooterViewReuseIdentifier: tableViewReuseIdentifier)
-        
+                                 forCellReuseIdentifier: tableViewReuseIdentifier)
         bottomTableView.delegate = self
         bottomTableView.dataSource = self
         bottomTableView.tableFooterView = UIView()
@@ -115,7 +115,6 @@ class WeatherView: UIView {
     func refreshDate() {
         setupCurrentWeather()
     }
-    
 }
 
 // MARK: - UITableViewDelegate/Datasource

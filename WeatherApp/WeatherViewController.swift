@@ -26,10 +26,33 @@ class WeatherViewController: UIViewController {
         let weatherView = WeatherView(frame: frame)
         weatherScrollView.addSubview(weatherView)
         
-        weatherView.currentWeatherData = CurrentWeather()
+        downloadTotalWeatherData(weatherView: weatherView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    // MARK: - Helpers
+    private func getCurrentWeather(weatherView: WeatherView) {
+        weatherView.currentWeatherData = CurrentWeather()
+    }
+    
+    private func getWeeklyWeather(weatherView: WeatherView) {
+        WeeklyWeather.downloadWeeklyForecastWeather { weatherForecasts in
+            weatherView.weeklyWeatherForecastData = weatherForecasts
+        }
+    }
+    
+    private func getHourlyWeather(weatherView: WeatherView) {
+        HourlyWeather.downloadHourlyForecastWeather { weatherForecasts in
+            weatherView.dailyWeatherForcastData = weatherForecasts
+        }
+    }
+    
+    func downloadTotalWeatherData(weatherView: WeatherView) {
+        getCurrentWeather(weatherView: weatherView)
+        getWeeklyWeather(weatherView: weatherView)
+        getHourlyWeather(weatherView: weatherView)
     }
 }

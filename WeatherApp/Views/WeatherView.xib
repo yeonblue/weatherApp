@@ -11,69 +11,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherView" customModule="WeatherApp" customModuleProvider="target">
             <connections>
-                <outlet property="bottomContainerView" destination="mNg-fD-ijL" id="hns-B7-U6P"/>
-                <outlet property="bottomScrollView" destination="3dX-V6-22X" id="FpI-1b-A5T"/>
-                <outlet property="bottomTableView" destination="ueB-R8-VaU" id="aOG-qM-mOm"/>
-                <outlet property="cityNameLabel" destination="Qdx-sO-yRK" id="uln-wv-QdR"/>
-                <outlet property="dateLabel" destination="iM6-dL-j0j" id="fCn-CZ-omY"/>
-                <outlet property="hourlyWeatherCollectionView" destination="TDu-2L-UqE" id="ovv-rg-UaR"/>
-                <outlet property="infoCollectionView" destination="oK1-8H-anT" id="bbZ-in-zCD"/>
-                <outlet property="mainView" destination="i5M-Pr-FkT" id="cfK-qM-m2x"/>
-                <outlet property="temperatureLabel" destination="dFd-Xx-8ez" id="NXI-OI-bZf"/>
-                <outlet property="weatherInfoLabel" destination="KgM-04-vot" id="Cb6-iw-WHb"/>
+                <outlet property="bottomContainerView" destination="mNg-fD-ijL" id="yXa-Gr-qF6"/>
+                <outlet property="bottomScrollView" destination="3dX-V6-22X" id="DpI-hB-Rpn"/>
+                <outlet property="bottomTableView" destination="ueB-R8-VaU" id="TjD-Sr-712"/>
+                <outlet property="cityNameLabel" destination="Qdx-sO-yRK" id="cqq-14-NBp"/>
+                <outlet property="dateLabel" destination="iM6-dL-j0j" id="yN3-Ud-WPf"/>
+                <outlet property="hourlyWeatherCollectionView" destination="TDu-2L-UqE" id="egu-ay-rf6"/>
+                <outlet property="infoCollectionView" destination="oK1-8H-anT" id="Xi8-UD-iwp"/>
+                <outlet property="mainView" destination="i5M-Pr-FkT" id="X8S-j8-GqQ"/>
+                <outlet property="temperatureLabel" destination="dFd-Xx-8ez" id="tR0-pZ-tFu"/>
+                <outlet property="weatherInfoLabel" destination="KgM-04-vot" id="DjW-DM-HqK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="WeatherView" customModule="WeatherApp" customModuleProvider="target">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="980"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIk-Sx-06C">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdx-sO-yRK">
-                            <rect key="frame" x="8" y="10" width="398" height="20"/>
-                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgM-04-vot">
-                            <rect key="frame" x="8" y="217" width="398" height="20"/>
-                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFd-Xx-8ez">
-                            <rect key="frame" x="8" y="98.5" width="398" height="103.5"/>
-                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="90"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iM6-dL-j0j">
-                            <rect key="frame" x="8" y="45" width="398" height="20"/>
-                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstItem="iM6-dL-j0j" firstAttribute="top" secondItem="Qdx-sO-yRK" secondAttribute="bottom" constant="15" id="0lu-QB-qFm"/>
-                        <constraint firstAttribute="height" constant="300" id="5pK-wq-rI0"/>
-                        <constraint firstItem="dFd-Xx-8ez" firstAttribute="centerX" secondItem="aIk-Sx-06C" secondAttribute="centerX" id="AXb-8A-tg8"/>
-                        <constraint firstAttribute="trailing" secondItem="Qdx-sO-yRK" secondAttribute="trailing" constant="8" id="YGS-G5-Vv4"/>
-                        <constraint firstAttribute="trailing" secondItem="iM6-dL-j0j" secondAttribute="trailing" constant="8" id="YYd-Yg-ae1"/>
-                        <constraint firstItem="KgM-04-vot" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="aEJ-Rg-cFO"/>
-                        <constraint firstItem="dFd-Xx-8ez" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="d0m-ga-Hiq"/>
-                        <constraint firstItem="dFd-Xx-8ez" firstAttribute="centerY" secondItem="aIk-Sx-06C" secondAttribute="centerY" id="eTt-z4-Oc0"/>
-                        <constraint firstItem="KgM-04-vot" firstAttribute="top" secondItem="dFd-Xx-8ez" secondAttribute="bottom" constant="15" id="hGS-wF-OgR"/>
-                        <constraint firstAttribute="trailing" secondItem="dFd-Xx-8ez" secondAttribute="trailing" constant="8" id="jU9-VS-aFc"/>
-                        <constraint firstAttribute="trailing" secondItem="KgM-04-vot" secondAttribute="trailing" constant="8" id="n89-36-EOp"/>
-                        <constraint firstItem="Qdx-sO-yRK" firstAttribute="top" secondItem="aIk-Sx-06C" secondAttribute="top" constant="10" id="pFG-S0-emF"/>
-                        <constraint firstItem="Qdx-sO-yRK" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="r5M-0o-KrJ"/>
-                        <constraint firstItem="iM6-dL-j0j" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="yPc-9a-fkE"/>
-                    </constraints>
-                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3dX-V6-22X">
                     <rect key="frame" x="0.0" y="304" width="414" height="676"/>
                     <subviews>
@@ -151,6 +105,52 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="ooG-Id-VxQ"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="Bd1-KU-O6r"/>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIk-Sx-06C">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qdx-sO-yRK">
+                            <rect key="frame" x="8" y="10" width="398" height="20"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KgM-04-vot">
+                            <rect key="frame" x="8" y="217" width="398" height="20"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFd-Xx-8ez">
+                            <rect key="frame" x="8" y="98.5" width="398" height="103.5"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="90"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iM6-dL-j0j">
+                            <rect key="frame" x="8" y="45" width="398" height="20"/>
+                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="iM6-dL-j0j" firstAttribute="top" secondItem="Qdx-sO-yRK" secondAttribute="bottom" constant="15" id="0lu-QB-qFm"/>
+                        <constraint firstAttribute="height" constant="300" id="5pK-wq-rI0"/>
+                        <constraint firstItem="dFd-Xx-8ez" firstAttribute="centerX" secondItem="aIk-Sx-06C" secondAttribute="centerX" id="AXb-8A-tg8"/>
+                        <constraint firstAttribute="trailing" secondItem="Qdx-sO-yRK" secondAttribute="trailing" constant="8" id="YGS-G5-Vv4"/>
+                        <constraint firstAttribute="trailing" secondItem="iM6-dL-j0j" secondAttribute="trailing" constant="8" id="YYd-Yg-ae1"/>
+                        <constraint firstItem="KgM-04-vot" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="aEJ-Rg-cFO"/>
+                        <constraint firstItem="dFd-Xx-8ez" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="d0m-ga-Hiq"/>
+                        <constraint firstItem="dFd-Xx-8ez" firstAttribute="centerY" secondItem="aIk-Sx-06C" secondAttribute="centerY" id="eTt-z4-Oc0"/>
+                        <constraint firstItem="KgM-04-vot" firstAttribute="top" secondItem="dFd-Xx-8ez" secondAttribute="bottom" constant="15" id="hGS-wF-OgR"/>
+                        <constraint firstAttribute="trailing" secondItem="dFd-Xx-8ez" secondAttribute="trailing" constant="8" id="jU9-VS-aFc"/>
+                        <constraint firstAttribute="trailing" secondItem="KgM-04-vot" secondAttribute="trailing" constant="8" id="n89-36-EOp"/>
+                        <constraint firstItem="Qdx-sO-yRK" firstAttribute="top" secondItem="aIk-Sx-06C" secondAttribute="top" constant="10" id="pFG-S0-emF"/>
+                        <constraint firstItem="Qdx-sO-yRK" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="r5M-0o-KrJ"/>
+                        <constraint firstItem="iM6-dL-j0j" firstAttribute="leading" secondItem="aIk-Sx-06C" secondAttribute="leading" constant="8" id="yPc-9a-fkE"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
