@@ -7,6 +7,10 @@
 
 import UIKit
 
+private let tableViewReuseIdentifier = "TableViewCell"
+private let hourlyCollectionViewReuseIdentifier = "HourlyWeatherCollectionViewCell"
+private let infoCollectionViewReuseIdentifier = "InfoCollectionViewCell"
+
 class WeatherView: UIView {
 
     // MARK: - IBOultet
@@ -24,13 +28,29 @@ class WeatherView: UIView {
     @IBOutlet weak var bottomTableView: UITableView!
     
     // MARK: - Properties
-    var currentWeather: CurrentWeather? {
+    var currentWeatherData: CurrentWeather? {
         didSet {
-            currentWeather?.getCurrentWeather(completion: { success in
+            currentWeatherData?.getCurrentWeather(completion: { success in
                 if success {
                     self.refreshDate()
                 }
             })
+        }
+    }
+    
+    var weeklyWeatherForecastData = [WeeklyWeather]() {
+        didSet{
+            
+        }
+    }
+    var dailyWeatherForcastData = [HourlyWeather]() {
+        didSet{
+            
+        }
+    }
+    var weatherInfoData = [WeatherInfo]() {
+        didSet{
+            
         }
     }
     
@@ -58,20 +78,31 @@ class WeatherView: UIView {
     
     // MARK: - Helpers
     private func setupTableView() {
+        bottomTableView.register(UINib(nibName: "WeatherTableViewCell", bundle: Bundle.main),
+                                 forHeaderFooterViewReuseIdentifier: tableViewReuseIdentifier)
         
+        bottomTableView.delegate = self
+        bottomTableView.dataSource = self
+        bottomTableView.tableFooterView = UIView()
     }
     
     private func setupHourlyCollectionView() {
-        
+        hourlyWeatherCollectionView.register(UINib(nibName: "ForecastCollectionViewCell",
+                                                   bundle: Bundle.main),
+                                             forCellWithReuseIdentifier: hourlyCollectionViewReuseIdentifier)
+        hourlyWeatherCollectionView.dataSource = self
     }
     
     private func setupInfoCollectionView() {
-        
+        infoCollectionView.register(UINib(nibName: "InfoCollectionViewCell",
+                                                   bundle: Bundle.main),
+                                             forCellWithReuseIdentifier: infoCollectionViewReuseIdentifier)
+        infoCollectionView.dataSource = self
     }
     
     private func setupCurrentWeather() {
         
-        guard let currentWeather = currentWeather else { return }
+        guard let currentWeather = currentWeatherData else { return }
         
         cityNameLabel.text = currentWeather.city
         dateLabel.text = "Today, \(currentWeather.date.shortDate())"
@@ -85,4 +116,43 @@ class WeatherView: UIView {
         setupCurrentWeather()
     }
     
+}
+
+// MARK: - UITableViewDelegate/Datasource
+extension WeatherView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return weeklyWeatherForecastData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewReuseIdentifier,
+                                                 for: indexPath) as! WeatherTableViewCell
+        cell.generateCell(forecast: weeklyWeatherForecastData[indexPath.row])
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension WeatherView: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == hourlyWeatherCollectionView {
+            return dailyWeatherForcastData.count
+        } else {
+            return weatherInfoData.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == hourlyWeatherCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: hourlyCollectionViewReuseIdentifier,
+                                                          for: indexPath) as! ForecastCollectionViewCell
+            cell.genearateCell(weather: dailyWeatherForcastData[indexPath.row])
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: infoCollectionViewReuseIdentifier,
+                                                          for: indexPath) as! InfoCollectionViewCell
+            cell.generateCell(weatherInfo: weatherInfoData[indexPath.row])
+            return cell
+        }
+    }
 }

@@ -26,7 +26,7 @@ class WeatherViewController: UIViewController {
         let weatherView = WeatherView(frame: frame)
         weatherScrollView.addSubview(weatherView)
         
-        weatherView.currentWeather = CurrentWeather()
+        weatherView.currentWeatherData = CurrentWeather()
     }
     
     override func viewWillAppear(_ animated: Bool) {
