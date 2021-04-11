@@ -10,3 +10,5 @@ import Foundation
 var CURRENT_LOCATION_URL = ""
 var CURRENT_LOCATION_WEEKLY_FORECAST_URL = ""
 var CURRENT_LOCATION_HOURLY_FORECAST_URL = ""
+
+let kLOCATION = "UserDefaultLocations"

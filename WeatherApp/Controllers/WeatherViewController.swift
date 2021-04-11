@@ -24,7 +24,7 @@ class WeatherViewController: UIViewController {
                            height: weatherScrollView.bounds.height)
         
         let weatherView = WeatherView(frame: frame)
-        weatherView.weatherLocation = WeatherLocation(city: "Seoul",
+        weatherView.weatherLocation = WeatherLocation(city: "Wonju",
                                                       country: "Korea",
                                                       countryCode: "KR",
                                                       isCurrentLocation: false)

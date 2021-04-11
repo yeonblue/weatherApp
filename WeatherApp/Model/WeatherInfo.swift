@@ -13,9 +13,14 @@ struct WeatherInfo {
     var image: UIImage?
 }
 
-struct WeatherLocation {
+struct WeatherLocation: Equatable, Codable {
     var city: String!
     var country: String!
     var countryCode: String!
     var isCurrentLocation: Bool!
+}
+
+struct CityInfo {
+    var city: String!
+    var temperature: Double!
 }

@@ -104,7 +104,7 @@
                                     </constraints>
                                     <state key="normal" image="add"/>
                                     <connections>
-                                        <segue destination="3Ph-VC-Xul" kind="show" id="n95-XU-u5X"/>
+                                        <segue destination="3Ph-VC-Xul" kind="show" identifier="chooseLocationSeque" id="n95-XU-u5X"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -115,13 +115,40 @@
                             </constraints>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="iED-KB-56f">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableViewCell" id="iED-KB-56f" customClass="MainWeatherTableViewCell" customModule="WeatherApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iED-KB-56f" id="9pt-7i-Hd0">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="et0-mH-Gdk">
+                                            <rect key="frame" x="28" y="28.5" width="289" height="23"/>
+                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="0.0C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy6-0a-T6p">
+                                            <rect key="frame" x="347" y="30.5" width="39" height="23"/>
+                                            <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Fy6-0a-T6p" firstAttribute="leading" secondItem="et0-mH-Gdk" secondAttribute="trailing" constant="30" id="0wj-zb-YZt"/>
+                                        <constraint firstItem="Fy6-0a-T6p" firstAttribute="centerY" secondItem="9pt-7i-Hd0" secondAttribute="centerY" constant="2" id="Eeg-b9-AZu"/>
+                                        <constraint firstItem="et0-mH-Gdk" firstAttribute="centerY" secondItem="9pt-7i-Hd0" secondAttribute="centerY" id="YZW-rX-juA"/>
+                                        <constraint firstItem="et0-mH-Gdk" firstAttribute="leading" secondItem="9pt-7i-Hd0" secondAttribute="leadingMargin" constant="8" id="ccl-pU-ohl"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Fy6-0a-T6p" secondAttribute="trailing" constant="8" id="tQD-FH-lRp"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="cityLabel" destination="et0-mH-Gdk" id="KTP-0h-Suf"/>
+                                    <outlet property="temperatureLabel" destination="Fy6-0a-T6p" id="Pec-nX-vmP"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -132,7 +159,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2T-Hb-Suk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817" y="100"/>
+            <point key="canvasLocation" x="815.94202898550736" y="99.776785714285708"/>
         </scene>
         <!--Choose City View Controller-->
         <scene sceneID="KCA-TR-QnA">
