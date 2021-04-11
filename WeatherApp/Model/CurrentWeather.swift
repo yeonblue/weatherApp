@@ -29,8 +29,15 @@ class CurrentWeather {
     var sunset: String! // 일출 시간
     
     // MARK: - Functions
-    func getCurrentWeather(completion: @escaping(Bool) -> Void) {
-        let LOCATION_API_URL = "https://api.weatherbit.io/v2.0/current?city=Seoul,KR&key=4369fd2fcad24f21b39355af07074845"
+    func getCurrentWeather(location: WeatherLocation, completion: @escaping(Bool) -> Void) {
+        
+        var LOCATION_API_URL: String
+        
+        if !location.isCurrentLocation {
+            LOCATION_API_URL = String(format: "https://api.weatherbit.io/v2.0/current?city=%@,%@&key=4369fd2fcad24f21b39355af07074845", location.city, location.countryCode)
+        } else {
+            LOCATION_API_URL = CURRENT_LOCATION_URL
+        }
         
         AF.request(LOCATION_API_URL).responseJSON { response in
             let result = response.result

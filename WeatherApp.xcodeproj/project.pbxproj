@@ -21,6 +21,7 @@
 		4594C0A82620824400F6B4B8 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594C0A72620824400F6B4B8 /* WeatherInfo.swift */; };
 		4594C0AC262119DB00F6B4B8 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594C0AA262119DB00F6B4B8 /* WeatherTableViewCell.swift */; };
 		4594C0AD262119DB00F6B4B8 /* WeatherTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4594C0AB262119DB00F6B4B8 /* WeatherTableViewCell.xib */; };
+		4594C0D52622ADE900F6B4B8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594C0D42622ADE900F6B4B8 /* Constants.swift */; };
 		45C4A54A26199C9300B3E1D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4A54926199C9300B3E1D0 /* AppDelegate.swift */; };
 		45C4A54C26199C9300B3E1D0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C4A54B26199C9300B3E1D0 /* SceneDelegate.swift */; };
 		45C4A55126199C9300B3E1D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45C4A54F26199C9300B3E1D0 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		4594C0A72620824400F6B4B8 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		4594C0AA262119DB00F6B4B8 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		4594C0AB262119DB00F6B4B8 /* WeatherTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeatherTableViewCell.xib; sourceTree = "<group>"; };
+		4594C0D42622ADE900F6B4B8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45C4A54626199C9300B3E1D0 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45C4A54926199C9300B3E1D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45C4A54B26199C9300B3E1D0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4594C0CE2622AB4500F6B4B8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				452B0943261DCA1700C4A461 /* Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4594C0CF2622AB6C00F6B4B8 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				452B09212619CD7100C4A461 /* GlobalHelpers.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		45C4A53D26199C9300B3E1D0 = {
 			isa = PBXGroup;
 			children = (
@@ -106,12 +124,13 @@
 		45C4A54826199C9300B3E1D0 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				452B0943261DCA1700C4A461 /* Extension.swift */,
-				452B09212619CD7100C4A461 /* GlobalHelpers.swift */,
+				4594C0CE2622AB4500F6B4B8 /* Extensions */,
 				45C4A56A2619A66800B3E1D0 /* Model */,
 				452B094A261F2BA200C4A461 /* Views */,
-				45C4A54926199C9300B3E1D0 /* AppDelegate.swift */,
+				4594C0CF2622AB6C00F6B4B8 /* Helpers */,
+				4594C0D42622ADE900F6B4B8 /* Constants.swift */,
 				45C4A54B26199C9300B3E1D0 /* SceneDelegate.swift */,
+				45C4A54926199C9300B3E1D0 /* AppDelegate.swift */,
 				45C4A54F26199C9300B3E1D0 /* Main.storyboard */,
 				45C4A55226199C9600B3E1D0 /* Assets.xcassets */,
 				45C4A55426199C9600B3E1D0 /* LaunchScreen.storyboard */,
@@ -278,6 +297,7 @@
 				4594C0A82620824400F6B4B8 /* WeatherInfo.swift in Sources */,
 				452B094D261F2BEE00C4A461 /* ForecastCollectionViewCell.swift in Sources */,
 				4594C0A42620803700F6B4B8 /* InfoCollectionViewCell.swift in Sources */,
+				4594C0D52622ADE900F6B4B8 /* Constants.swift in Sources */,
 				4594C0AC262119DB00F6B4B8 /* WeatherTableViewCell.swift in Sources */,
 				452B093C261C880C00C4A461 /* WeatherView.swift in Sources */,
 			);

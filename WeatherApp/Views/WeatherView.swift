@@ -27,15 +27,14 @@ class WeatherView: UIView {
     @IBOutlet weak var bottomTableView: UITableView!
     
     // MARK: - Properties
-    var currentWeatherData: CurrentWeather? {
-        didSet {
-            currentWeatherData?.getCurrentWeather(completion: { success in
-                if success {
-                    self.refreshDate()
-                }
-            })
+    
+    var weatherLocation: WeatherLocation! {
+        willSet(newValue) {
+            downloadWeatherDatas(newValue)
         }
     }
+    
+    var currentWeatherData: CurrentWeather?
     
     var weeklyWeatherForecastData = [WeeklyWeather]() {
         didSet{
@@ -56,7 +55,7 @@ class WeatherView: UIView {
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
-        mainInit()
+        self.mainInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -151,8 +150,25 @@ class WeatherView: UIView {
     
     // MARK: - Functions
     
-    func refreshDate() {
+    func refreshData() {
         setupCurrentWeather()
+    }
+    
+    private func downloadWeatherDatas(_ newValue: WeatherLocation) {
+        currentWeatherData = CurrentWeather()
+        currentWeatherData?.getCurrentWeather(location: newValue, completion: { success in
+            if success {
+                self.refreshData()
+            }
+        })
+        
+        WeeklyWeather.downloadWeeklyForecastWeather(location: newValue) { datas in
+            self.weeklyWeatherForecastData = datas
+        }
+        
+        HourlyWeather.downloadHourlyForecastWeather(location: newValue) { datas in
+            self.dailyWeatherForcastData = datas
+        }
     }
 }
 

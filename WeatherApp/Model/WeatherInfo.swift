@@ -12,3 +12,10 @@ struct WeatherInfo {
     var nameText: String?
     var image: UIImage?
 }
+
+struct WeatherLocation {
+    var city: String!
+    var country: String!
+    var countryCode: String!
+    var isCurrentLocation: Bool!
+}

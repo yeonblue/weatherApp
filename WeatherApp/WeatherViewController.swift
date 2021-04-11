@@ -24,35 +24,14 @@ class WeatherViewController: UIViewController {
                            height: weatherScrollView.bounds.height)
         
         let weatherView = WeatherView(frame: frame)
+        weatherView.weatherLocation = WeatherLocation(city: "Seoul",
+                                                      country: "Korea",
+                                                      countryCode: "KR",
+                                                      isCurrentLocation: false)
         weatherScrollView.addSubview(weatherView)
-        
-        downloadTotalWeatherData(weatherView: weatherView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    // MARK: - Helpers
-    private func getCurrentWeather(weatherView: WeatherView) {
-        weatherView.currentWeatherData = CurrentWeather()
-    }
-    
-    private func getWeeklyWeather(weatherView: WeatherView) {
-        WeeklyWeather.downloadWeeklyForecastWeather { weatherForecasts in
-            weatherView.weeklyWeatherForecastData = weatherForecasts
-        }
-    }
-    
-    private func getHourlyWeather(weatherView: WeatherView) {
-        HourlyWeather.downloadHourlyForecastWeather { weatherForecasts in
-            weatherView.dailyWeatherForcastData = weatherForecasts
-        }
-    }
-    
-    func downloadTotalWeatherData(weatherView: WeatherView) {
-        getCurrentWeather(weatherView: weatherView)
-        getWeeklyWeather(weatherView: weatherView)
-        getHourlyWeather(weatherView: weatherView)
     }
 }
