@@ -13,8 +13,7 @@ private let infoCollectionViewReuseIdentifier = "InfoCollectionViewCell"
 
 class WeatherView: UIView {
 
-    // MARK: - IBOultet
-
+    // MARK: - IBOuttet
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -108,6 +107,46 @@ class WeatherView: UIView {
         dateLabel.text = "Today, \(currentWeather.date.shortDate())"
         weatherInfoLabel.text = currentWeather.weatherType
         temperatureLabel.text = String(describing: currentWeather.currentTemperature!)
+        
+        setupWeatherInfo()
+    }
+    
+    private func setupWeatherInfo() {
+        guard let info = currentWeatherData else { return }
+        let windInfo = WeatherInfo(infoText: String(format: "%.1f m/sec", info.windSpeed!),
+                                   nameText: nil,
+                                   image: getWeatherIconForImage("wind"))
+        
+        let humidity = WeatherInfo(infoText: String(format: "%.0f", info.humidity!),
+                                   nameText: nil,
+                                   image: getWeatherIconForImage("humidity"))
+        
+        let pressureInfo = WeatherInfo(infoText: String(format: "%.0f mb", info.pressure!),
+                                       nameText: nil,
+                                       image: getWeatherIconForImage("pressure"))
+        
+        let visibilityInfo = WeatherInfo(infoText: String(format: "%.0f km", info.visibility!),
+                                         nameText: nil,
+                                         image: getWeatherIconForImage("visibility"))
+        
+        let feelsLike = WeatherInfo(infoText: String(format: "%.1f", info.feelsLikeTemperature!),
+                                    nameText: nil,
+                                    image: getWeatherIconForImage("feelsLike"))
+        
+        let uvInfo = WeatherInfo(infoText: String(format: "%.1f", info.uvIndex ?? 0.0),
+                                 nameText: "UV Index",
+                                 image: nil)
+        
+        let sunriseInfo = WeatherInfo(infoText: info.sunrise!,
+                                      nameText: nil,
+                                      image: getWeatherIconForImage("sunrise"))
+        
+        let sunset = WeatherInfo(infoText: info.sunset!,
+                                 nameText: nil,
+                                 image: getWeatherIconForImage("sunset"))
+        
+        weatherInfoData = [windInfo, humidity, pressureInfo, visibilityInfo,
+                           feelsLike, uvInfo, sunriseInfo, sunset]
     }
     
     // MARK: - Functions
