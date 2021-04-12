@@ -30,11 +30,29 @@ class AllLocationsTableViewController: UITableViewController {
         }
     }
     
+    private func saveNewLocationsToUserDefaults() {
+        userDefaults.setValue(try? PropertyListEncoder().encode(savedLocation!), forKey: kLOCATION)
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "chooseLocationSeque" {
             let destVC = segue.destination as! ChooseCityViewController
             destVC.delegate = self
+        }
+    }
+    
+    // MARK: - Helpers
+    private func removeLocationFromSavedLocations(location: String) {
+        guard savedLocation != nil else { return }
+        
+        for i in 0..<savedLocation!.count {
+            let tempLocation = savedLocation![i]
+            
+            if tempLocation.city == location {
+                savedLocation!.remove(at: i)
+                return
+            }
         }
     }
 }
@@ -67,6 +85,7 @@ extension AllLocationsTableViewController {
         if editingStyle == .delete {
             guard let locationToDelete = cityInfoData?[indexPath.row] else { return }
             cityInfoData?.remove(at: indexPath.row)
+            removeLocationFromSavedLocations(location: locationToDelete.city)
             tableView.reloadData()
             
             // UserDefaults에서도 제거
