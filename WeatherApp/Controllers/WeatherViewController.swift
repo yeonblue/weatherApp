@@ -18,6 +18,13 @@ class WeatherViewController: UIViewController {
     // MARK: - Properties
     var locationManager: CLLocationManager?
     var currentLocation: CLLocationCoordinate2D!
+    var userDefaults = UserDefaults.standard
+    
+    var allLocations = [WeatherLocation]()
+    var allWeatherView = [WeatherView]()
+    var allWeatherData = [CityInfo]()
+    
+    var weatherView: WeatherView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,7 +37,7 @@ class WeatherViewController: UIViewController {
                            width: weatherScrollView.bounds.width,
                            height: weatherScrollView.bounds.height)
         
-        let weatherView = WeatherView(frame: frame)
+        weatherView = WeatherView(frame: frame)
         weatherView.weatherLocation = WeatherLocation(city: "Wonju",
                                                       country: "Korea",
                                                       countryCode: "KR",
@@ -40,6 +47,8 @@ class WeatherViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        locationAuthCheck()
     }
     
     // MARK: - Location Manager
@@ -65,6 +74,10 @@ class WeatherViewController: UIViewController {
             currentLocation = locationManager?.location?.coordinate
             if currentLocation != nil {
                 // set coordinates
+                LocationService.shared.latitude = currentLocation.latitude
+                LocationService.shared.logitude = currentLocation.longitude
+                
+                getWeather()
             } else {
                 locationAuthCheck()
             }
@@ -73,6 +86,28 @@ class WeatherViewController: UIViewController {
             
             // 동의 하지 않으면 다시 묻기
             locationAuthCheck()
+        }
+    }
+    
+    // MARK: - Helpers
+    private func getWeather() {
+        loadLocationFromUserDefaults()
+    }
+
+    // MARK: - UserDefaults(Weather Info)
+    private func loadLocationFromUserDefaults() {
+        var currentLocation = WeatherLocation(city: "",
+                                              country: "",
+                                              countryCode: "",
+                                              isCurrentLocation: true)
+        
+        if let data = userDefaults.value(forKey: kLOCATION) as? Data {
+            allLocations = try! PropertyListDecoder().decode([WeatherLocation].self, from: data)
+            allLocations.insert(currentLocation, at: 0)
+            
+        } else {
+            print("DEBUG: No user data")
+            allLocations.append(currentLocation)
         }
     }
 }
