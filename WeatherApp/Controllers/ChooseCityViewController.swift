@@ -54,7 +54,7 @@ class ChooseCityViewController: UIViewController {
         // dimsBackgroundDuringPresentation는 deprecated
         searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
-        searchController.searchBar.searchBarStyle = .prominent // 항상 visible
+        searchController.searchBar.searchBarStyle = .prominent
         searchController.searchBar.sizeToFit()
         searchController.searchBar.backgroundImage = UIImage() // background 제거용
         searchController.searchBar.tintColor = .white
@@ -143,6 +143,8 @@ class ChooseCityViewController: UIViewController {
         
         userDefaults.set( try! PropertyListEncoder().encode(savedLocation!), forKey: kLOCATION)
         userDefaults.synchronize()
+        
+        print("DEBUG: User Default Saved")
     }
     
     private func loadFromUserDefaults() {

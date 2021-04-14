@@ -21,7 +21,7 @@ class WeatherViewController: UIViewController {
     var userDefaults = UserDefaults.standard
     
     var allLocations = [WeatherLocation]()
-    var allWeatherView = [WeatherView]()
+    var allWeatherViews = [WeatherView]()
     var allWeatherData = [CityInfo]()
     
     var weatherView: WeatherView!
@@ -32,32 +32,34 @@ class WeatherViewController: UIViewController {
         
         locationManagerStart()
         
-        let frame = CGRect(x: 0,
-                           y: 0,
-                           width: weatherScrollView.bounds.width,
-                           height: weatherScrollView.bounds.height)
-        
-        weatherView = WeatherView(frame: frame)
-        weatherView.weatherLocation = WeatherLocation(city: "Wonju",
-                                                      country: "Korea",
-                                                      countryCode: "KR",
-                                                      isCurrentLocation: false)
-        weatherScrollView.addSubview(weatherView)
+//        let frame = CGRect(x: 0,
+//                           y: 0,
+//                           width: weatherScrollView.bounds.width,
+//                           height: weatherScrollView.bounds.height)
+//
+//        weatherView = WeatherView(frame: frame)
+//
+//        weatherView.weatherLocation = WeatherLocation(city: "Wonju",
+//                                                      country: "Korea",
+//                                                      countryCode: "KR",
+//                                                      isCurrentLocation: false)
+//        weatherScrollView.addSubview(weatherView)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         locationAuthCheck()
+        print(allLocations.count)
     }
     
     // MARK: - Location Manager
     private func locationManagerStart() {
         if locationManager == nil {
             locationManager = CLLocationManager()
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager?.requestWhenInUseAuthorization() // Privacy - Location When In Use Usage Description
-            locationManager?.delegate = self
+            locationManager!.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager!.requestWhenInUseAuthorization() // Privacy - Location When In Use Usage Description
+            locationManager!.delegate = self
         }
         
         locationManager?.startMonitoringSignificantLocationChanges()
@@ -70,12 +72,14 @@ class WeatherViewController: UIViewController {
     }
     
     private func locationAuthCheck() {
-        if CLLocationManager.authorizationStatus() == .authorizedAlways {
-            currentLocation = locationManager?.location?.coordinate
+        if CLLocationManager.authorizationStatus() != .denied {
+            currentLocation = locationManager!.location?.coordinate
+            
             if currentLocation != nil {
                 // set coordinates
                 LocationService.shared.latitude = currentLocation.latitude
                 LocationService.shared.logitude = currentLocation.longitude
+                locationManagerStop()
                 
                 getWeather()
             } else {
@@ -89,14 +93,41 @@ class WeatherViewController: UIViewController {
         }
     }
     
-    // MARK: - Helpers
+    // MARK: - Make Weather View
     private func getWeather() {
         loadLocationFromUserDefaults()
+        createWeatherViews()
+        addWeatherToScrollView()
+    }
+    
+    private func createWeatherViews() {
+        for _ in allLocations {
+            allWeatherViews.append(WeatherView())
+        }
+    }
+    
+    private func addWeatherToScrollView() {
+        for index in 0..<allWeatherViews.count {
+            let weatherView = allWeatherViews[index]
+            let location = allLocations[index]
+            
+            weatherView.weatherLocation = location
+            
+            let xPos = self.view.frame.width * CGFloat(index)
+            
+            weatherView.frame = CGRect(x: xPos,
+                                       y: 0,
+                                       width: weatherScrollView.bounds.width,
+                                       height: weatherScrollView.bounds.height)
+            
+            weatherScrollView.addSubview(weatherView)
+            weatherScrollView.contentSize.width = weatherView.frame.width * CGFloat(index + 1)
+        }
     }
 
     // MARK: - UserDefaults(Weather Info)
     private func loadLocationFromUserDefaults() {
-        var currentLocation = WeatherLocation(city: "",
+        let currentLocation = WeatherLocation(city: "",
                                               country: "",
                                               countryCode: "",
                                               isCurrentLocation: true)
@@ -104,6 +135,7 @@ class WeatherViewController: UIViewController {
         if let data = userDefaults.value(forKey: kLOCATION) as? Data {
             allLocations = try! PropertyListDecoder().decode([WeatherLocation].self, from: data)
             allLocations.insert(currentLocation, at: 0)
+            print(allLocations.count)
             
         } else {
             print("DEBUG: No user data")
