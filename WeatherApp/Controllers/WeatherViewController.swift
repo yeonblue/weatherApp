@@ -31,6 +31,7 @@ class WeatherViewController: UIViewController {
         super.viewDidLoad()
         
         locationManagerStart()
+        weatherScrollView.delegate = self
         
 //        let frame = CGRect(x: 0,
 //                           y: 0,
@@ -51,6 +52,11 @@ class WeatherViewController: UIViewController {
 
         locationAuthCheck()
         print(allLocations.count)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManagerStop()
     }
     
     // MARK: - Location Manager
@@ -98,6 +104,8 @@ class WeatherViewController: UIViewController {
         loadLocationFromUserDefaults()
         createWeatherViews()
         addWeatherToScrollView()
+        setPageControllPageNumber()
+        generateWeatherList()
     }
     
     private func createWeatherViews() {
@@ -124,7 +132,24 @@ class WeatherViewController: UIViewController {
             weatherScrollView.contentSize.width = weatherView.frame.width * CGFloat(index + 1)
         }
     }
+    
+    private func generateWeatherList() {
+        allWeatherData = []
+        for weatherView in allWeatherViews {
+            allWeatherData.append(CityInfo(city: weatherView.currentWeatherData?.city,
+                                           temperature: weatherView.currentWeatherData?.currentTemperature))
+        }
+    }
 
+    // MARK: - PageController
+    private func setPageControllPageNumber() {
+        weatherPageControl.numberOfPages = allWeatherViews.count
+    }
+    
+    private func updatePageControlSelectedPage(currentPage page: Int) {
+        weatherPageControl.currentPage = page
+    }
+    
     // MARK: - UserDefaults(Weather Info)
     private func loadLocationFromUserDefaults() {
         let currentLocation = WeatherLocation(city: "",
@@ -148,5 +173,12 @@ class WeatherViewController: UIViewController {
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to get location. \(error.localizedDescription)")
+    }
+}
+
+extension WeatherViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let value = scrollView.contentOffset.x / scrollView.frame.width
+        updatePageControlSelectedPage(currentPage: Int(round(value)))
     }
 }
