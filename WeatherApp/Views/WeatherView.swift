@@ -52,6 +52,8 @@ class WeatherView: UIView {
         }
     }
     
+    var cityInfo: CityInfo?
+    
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,8 +108,10 @@ class WeatherView: UIView {
         dateLabel.text = "Today, \(currentWeather.date.shortDate())"
         weatherInfoLabel.text = currentWeather.weatherType
         temperatureLabel.text = String(describing: currentWeather.currentTemperature!)
-        
         setupWeatherInfo()
+        
+        cityInfo = CityInfo(city: currentWeather.city!,
+                            temperature: currentWeather.currentTemperature!)
     }
     
     private func setupWeatherInfo() {

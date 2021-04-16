@@ -85,10 +85,12 @@ extension AllLocationsTableViewController {
         if editingStyle == .delete {
             guard let locationToDelete = cityInfoData?[indexPath.row] else { return }
             cityInfoData?.remove(at: indexPath.row)
+            
             removeLocationFromSavedLocations(location: locationToDelete.city)
             tableView.reloadData()
             
             // UserDefaults에서도 제거
+            saveNewLocationsToUserDefaults()
         }
     }
 }

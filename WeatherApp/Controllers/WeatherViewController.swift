@@ -78,7 +78,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func locationAuthCheck() {
-        if CLLocationManager.authorizationStatus() != .denied {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             currentLocation = locationManager!.location?.coordinate
             
             if currentLocation != nil {
@@ -105,7 +105,6 @@ class WeatherViewController: UIViewController {
         createWeatherViews()
         addWeatherToScrollView()
         setPageControllPageNumber()
-        generateWeatherList()
     }
     
     private func createWeatherViews() {
@@ -136,8 +135,17 @@ class WeatherViewController: UIViewController {
     private func generateWeatherList() {
         allWeatherData = []
         for weatherView in allWeatherViews {
-            allWeatherData.append(CityInfo(city: weatherView.currentWeatherData?.city,
-                                           temperature: weatherView.currentWeatherData?.currentTemperature))
+            allWeatherData.append(CityInfo(city: weatherView.cityInfo?.city,
+                                           temperature: weatherView.cityInfo?.temperature))
+        }
+    }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "allLocationSegue" {
+            generateWeatherList()
+            let vc = segue.destination as! AllLocationsTableViewController
+            vc.cityInfoData = allWeatherData
         }
     }
 
