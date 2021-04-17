@@ -25,33 +25,24 @@ class WeatherViewController: UIViewController {
     var allWeatherData = [CityInfo]()
     
     var weatherView: WeatherView!
+    var shouldRefresh: Bool = true
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         locationManagerStart()
         weatherScrollView.delegate = self
-        
-//        let frame = CGRect(x: 0,
-//                           y: 0,
-//                           width: weatherScrollView.bounds.width,
-//                           height: weatherScrollView.bounds.height)
-//
-//        weatherView = WeatherView(frame: frame)
-//
-//        weatherView.weatherLocation = WeatherLocation(city: "Wonju",
-//                                                      country: "Korea",
-//                                                      countryCode: "KR",
-//                                                      isCurrentLocation: false)
-//        weatherScrollView.addSubview(weatherView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        locationAuthCheck()
-        print(allLocations.count)
+        if shouldRefresh {
+            allLocations = []
+            allWeatherViews = []
+            locationAuthCheck()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -114,13 +105,13 @@ class WeatherViewController: UIViewController {
     }
     
     private func addWeatherToScrollView() {
-        for index in 0..<allWeatherViews.count {
-            let weatherView = allWeatherViews[index]
-            let location = allLocations[index]
+        for idx in 0..<allWeatherViews.count {
+            let weatherView = allWeatherViews[idx]
+            let location = allLocations[idx]
             
             weatherView.weatherLocation = location
             
-            let xPos = self.view.frame.width * CGFloat(index)
+            let xPos = self.view.frame.width * CGFloat(idx)
             
             weatherView.frame = CGRect(x: xPos,
                                        y: 0,
@@ -128,7 +119,7 @@ class WeatherViewController: UIViewController {
                                        height: weatherScrollView.bounds.height)
             
             weatherScrollView.addSubview(weatherView)
-            weatherScrollView.contentSize.width = weatherView.frame.width * CGFloat(index + 1)
+            weatherScrollView.contentSize.width = weatherView.frame.width * CGFloat(idx + 1)
         }
     }
     
@@ -146,6 +137,7 @@ class WeatherViewController: UIViewController {
             generateWeatherList()
             let vc = segue.destination as! AllLocationsTableViewController
             vc.cityInfoData = allWeatherData
+            vc.delegate = self
         }
     }
 
@@ -184,9 +176,23 @@ extension WeatherViewController: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - UIScrollViewDelegate
 extension WeatherViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let value = scrollView.contentOffset.x / scrollView.frame.width
         updatePageControlSelectedPage(currentPage: Int(round(value)))
+    }
+}
+
+// MARK: - AllLocationsTableViewControllerDelegate
+extension WeatherViewController: AllLocationsTableViewControllerDelegate {
+    func didChooseLocation(atIndex index: Int, shouldRefresh: Bool) {
+        let viewNumber = CGFloat(index)
+        let newOffset = CGPoint(x: (weatherScrollView.frame.width + 1) * viewNumber, y: 0)
+        
+        weatherScrollView.setContentOffset(newOffset, animated: true)
+        updatePageControlSelectedPage(currentPage: index)
+        
+        self.shouldRefresh = shouldRefresh
     }
 }

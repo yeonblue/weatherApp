@@ -9,12 +9,18 @@ import UIKit
 
 private let reuseIdentifier = "TableViewCell"
 
+protocol AllLocationsTableViewControllerDelegate: class {
+    func didChooseLocation(atIndex index: Int, shouldRefresh: Bool)
+}
+
 class AllLocationsTableViewController: UITableViewController {
 
     // MARK: - Properties
     let userDefaults = UserDefaults.standard
     var savedLocation: [WeatherLocation]?
     var cityInfoData: [CityInfo]?
+    weak var delegate: AllLocationsTableViewControllerDelegate?
+    var shouldRefresh: Bool = false
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -31,7 +37,10 @@ class AllLocationsTableViewController: UITableViewController {
     }
     
     private func saveNewLocationsToUserDefaults() {
+        
+        shouldRefresh = true
         userDefaults.setValue(try? PropertyListEncoder().encode(savedLocation!), forKey: kLOCATION)
+        userDefaults.synchronize()
     }
     
     // MARK: - Navigation
@@ -45,7 +54,7 @@ class AllLocationsTableViewController: UITableViewController {
     // MARK: - Helpers
     private func removeLocationFromSavedLocations(location: String) {
         guard savedLocation != nil else { return }
-        
+             
         for i in 0..<savedLocation!.count {
             let tempLocation = savedLocation![i]
             
@@ -74,7 +83,9 @@ extension AllLocationsTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.didChooseLocation(atIndex: indexPath.row, shouldRefresh: shouldRefresh)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -98,6 +109,9 @@ extension AllLocationsTableViewController {
 // MARK: - ChooseCityViewControllerDelegate
 extension AllLocationsTableViewController: ChooseCityViewControllerDelegate {
     func didWeatherLocationAdd(newLocation location: WeatherLocation) {
-        print("added", location.city!)
+        shouldRefresh = true
+        cityInfoData?.append(CityInfo(city: location.city,
+                                      temperature: 0.0))
+        print("DEBUG: City Added", location.city!)
     }
 }
