@@ -24,7 +24,7 @@ class ChooseCityViewController: UIViewController {
     var searchController = UISearchController()
     
     let userDefaults = UserDefaults.standard
-    var savedLocation: [WeatherLocation]?
+    var savedLocations: [WeatherLocation]?
     
     weak var delegate: ChooseCityViewControllerDelegate?
     
@@ -128,12 +128,12 @@ class ChooseCityViewController: UIViewController {
     
     // MARK: - UserDefault
     private func saveToUserDefaults(location: WeatherLocation) {
-        if savedLocation != nil {
-            if !savedLocation!.contains(location) {
-                savedLocation!.append(location)
+        if savedLocations != nil {
+            if !savedLocations!.contains(location) {
+                savedLocations!.append(location)
             }
         } else {
-            savedLocation = [location]
+            savedLocations = [location]
         }
         
         // model을 userdefault에 저장할 시 PropertyListEncoder/Decoder 사용
@@ -141,7 +141,7 @@ class ChooseCityViewController: UIViewController {
         // UserDefaults.standard.set(25, forKey: "Age")
         // let age = defaults.integer(forKey: "Age") 이후 userDefaults.synchronize()
         
-        userDefaults.set( try! PropertyListEncoder().encode(savedLocation!), forKey: kLOCATION)
+        userDefaults.set( try! PropertyListEncoder().encode(savedLocations!), forKey: kLOCATION)
         userDefaults.synchronize()
         
         print("DEBUG: User Default Saved")
@@ -149,7 +149,7 @@ class ChooseCityViewController: UIViewController {
     
     private func loadFromUserDefaults() {
         if let data = userDefaults.value(forKey: kLOCATION) as? Data {
-            savedLocation = try? PropertyListDecoder().decode([WeatherLocation].self, from: data)
+            savedLocations = try? PropertyListDecoder().decode([WeatherLocation].self, from: data)
         }
     }
 }
@@ -172,9 +172,12 @@ extension ChooseCityViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        saveToUserDefaults(location: filteredLocations[indexPath.row])
+        
+        let savedLocation = filteredLocations[indexPath.row]
+        saveToUserDefaults(location: savedLocation)
         
         chooseCityViewDismiss()
+        delegate?.didWeatherLocationAdd(newLocation: savedLocation)
     }
 }
 

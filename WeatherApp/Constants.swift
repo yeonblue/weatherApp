@@ -14,3 +14,4 @@ var CURRENT_LOCATION_WEEKLY_FORECAST_URL = "https://api.weatherbit.io/v2.0/forec
 var CURRENT_LOCATION_HOURLY_FORECAST_URL = "https://api.weatherbit.io/v2.0/forecast/hourly?lat=\(LM.latitude!)&lon=\(LM.logitude!)&hours=24&key=4369fd2fcad24f21b39355af07074845"
 
 let kLOCATION = "UserDefaultLocations"
+let kTEMPERATURE_FORMAT = "TempertureFormant"

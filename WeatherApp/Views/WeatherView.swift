@@ -107,7 +107,8 @@ class WeatherView: UIView {
         cityNameLabel.text = currentWeather.city
         dateLabel.text = "Today, \(currentWeather.date.shortDate())"
         weatherInfoLabel.text = currentWeather.weatherType
-        temperatureLabel.text = String(describing: currentWeather.currentTemperature!)
+        temperatureLabel.text =
+            String(describing: currentWeather.currentTemperature!) + returnTemperatureFormatFromUserDefaults()
         setupWeatherInfo()
         
         cityInfo = CityInfo(city: currentWeather.city!,

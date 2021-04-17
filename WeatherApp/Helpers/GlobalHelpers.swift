@@ -15,3 +15,29 @@ func curentDateFromTimestamp(doubleDate date: Double?) -> Date? {
 func getWeatherIconForImage(_ type: String) -> UIImage? {
     return UIImage(named: type)
 }
+
+
+// MARK: - Temperature
+func fahrenheitFromCelcius(celcius: Double) -> Double {
+    let value = (celcius * 9/5) + 32
+    return Double(String(format: "%.1f", value)) ?? 0.0
+}
+
+func getTemperatureBasedOnSetting(celsius: Double) -> Double {
+    let format = returnTemperatureFormatFromUserDefaults()
+    
+    if format == TemperatureFormat.celcius {
+        return celsius
+    } else {
+        return fahrenheitFromCelcius(celcius: celsius)
+    }
+}
+
+func returnTemperatureFormatFromUserDefaults() -> String {
+    if let temperatureFormat = UserDefaults.standard.value(forKey: kTEMPERATURE_FORMAT) as? Int{
+        return temperatureFormat == 0 ? TemperatureFormat.celcius
+                                      : TemperatureFormat.fahrenheit
+    } else {
+        return TemperatureFormat.celcius
+    }
+}

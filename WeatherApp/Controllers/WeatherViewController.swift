@@ -39,6 +39,7 @@ class WeatherViewController: UIViewController {
         super.viewDidAppear(animated)
 
         if shouldRefresh {
+            removeSubViewsFromScrollView()
             allLocations = []
             allWeatherViews = []
             locationAuthCheck()
@@ -128,6 +129,13 @@ class WeatherViewController: UIViewController {
         for weatherView in allWeatherViews {
             allWeatherData.append(CityInfo(city: weatherView.cityInfo?.city,
                                            temperature: weatherView.cityInfo?.temperature))
+        }
+    }
+    
+    private func removeSubViewsFromScrollView() {
+        // 지우지 않으면 계속 ScrollView Subview에 쌓이게 됨 주의
+        for view in weatherScrollView.subviews {
+            view.removeFromSuperview()
         }
     }
     

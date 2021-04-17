@@ -48,8 +48,12 @@ class CurrentWeather {
                 
                 self.city = json["data"][0]["city_name"].string
                 self.date = curentDateFromTimestamp(doubleDate: json["data"][0]["ts"].double)
-                self.currentTemperature = json["data"][0]["temp"].double
-                self.feelsLikeTemperature = json["data"][0]["app_temp"].double
+                
+                self.currentTemperature =
+                    getTemperatureBasedOnSetting(celsius: json["data"][0]["temp"].double ?? 0.0)
+                self.feelsLikeTemperature =
+                    getTemperatureBasedOnSetting(celsius: json["data"][0]["app_temp"].double ?? 0.0)
+                
                 self.uvIndex = json["data"][0]["city_name"].double
                 
                 self.weatherType = json["data"][0]["weather"]["description"].string

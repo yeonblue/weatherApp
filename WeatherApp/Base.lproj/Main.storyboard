@@ -108,9 +108,28 @@
                                         <segue destination="3Ph-VC-Xul" kind="show" identifier="chooseLocationSeque" id="n95-XU-u5X"/>
                                     </connections>
                                 </button>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eID-Gq-d1E">
+                                    <rect key="frame" x="8" y="8" width="150" height="40"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="150" id="Uug-YZ-BAH"/>
+                                    </constraints>
+                                    <segments>
+                                        <segment title="°C"/>
+                                        <segment title="°F"/>
+                                    </segments>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <connections>
+                                        <action selector="tempertureSegmentValueChanged:" destination="jMa-HE-D2X" eventType="valueChanged" id="gew-yW-VAg"/>
+                                    </connections>
+                                </segmentedControl>
                             </subviews>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="eID-Gq-d1E" firstAttribute="leading" secondItem="uPp-Hj-mKe" secondAttribute="leading" constant="8" id="KX6-p4-Ulm"/>
+                                <constraint firstItem="eID-Gq-d1E" firstAttribute="top" secondItem="uPp-Hj-mKe" secondAttribute="top" constant="8" id="SFL-B4-TRc"/>
+                                <constraint firstAttribute="bottom" secondItem="eID-Gq-d1E" secondAttribute="bottom" constant="8" id="kAr-y4-nUt"/>
                                 <constraint firstAttribute="trailing" secondItem="uvA-ZQ-rep" secondAttribute="trailing" constant="8" id="pOQ-Fv-2he"/>
                                 <constraint firstItem="uvA-ZQ-rep" firstAttribute="centerY" secondItem="uPp-Hj-mKe" secondAttribute="centerY" id="vfc-Og-s2U"/>
                             </constraints>
@@ -157,6 +176,9 @@
                             <outlet property="delegate" destination="jMa-HE-D2X" id="wPn-ax-lUp"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="temperatureSegmentedControl" destination="eID-Gq-d1E" id="TJF-rY-FOe"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2T-Hb-Suk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

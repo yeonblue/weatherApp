@@ -15,10 +15,23 @@ protocol AllLocationsTableViewControllerDelegate: class {
 
 class AllLocationsTableViewController: UITableViewController {
 
+    // MARK: - IBOutlets
+    @IBOutlet weak var temperatureSegmentedControl: UISegmentedControl!
+    
+    // MARK: - IBActions
+    @IBAction func tempertureSegmentValueChanged(_ sender: UISegmentedControl) {
+        updateTempertureFormatInUserDefaults(index: sender.selectedSegmentIndex)
+    }
+    
+    
     // MARK: - Properties
     let userDefaults = UserDefaults.standard
     var savedLocation: [WeatherLocation]?
-    var cityInfoData: [CityInfo]?
+    var cityInfoData: [CityInfo]? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     weak var delegate: AllLocationsTableViewControllerDelegate?
     var shouldRefresh: Bool = false
     
@@ -27,6 +40,7 @@ class AllLocationsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         loadLocationsFromUserDefaults()
+        loadTempertureFormatFromUserDefaults()
     }
     
     // MARK: - UserDefaults
@@ -41,6 +55,11 @@ class AllLocationsTableViewController: UITableViewController {
         shouldRefresh = true
         userDefaults.setValue(try? PropertyListEncoder().encode(savedLocation!), forKey: kLOCATION)
         userDefaults.synchronize()
+    }
+    
+    private func loadTempertureFormatFromUserDefaults() {
+        guard let idx = userDefaults.value(forKey: kTEMPERATURE_FORMAT) as? Int else { return }
+        temperatureSegmentedControl.selectedSegmentIndex = idx
     }
     
     // MARK: - Navigation
@@ -63,6 +82,12 @@ class AllLocationsTableViewController: UITableViewController {
                 return
             }
         }
+    }
+    
+    private func updateTempertureFormatInUserDefaults(index idx: Int) {
+        shouldRefresh = true
+        userDefaults.setValue(idx, forKey: kTEMPERATURE_FORMAT)
+        userDefaults.synchronize()
     }
 }
 

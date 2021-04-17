@@ -19,7 +19,8 @@ class HourlyWeather {
         let json = JSON(weatherDictionary)
         
         self.date = curentDateFromTimestamp(doubleDate: json["ts"].double)
-        self.temperature = json["temp"].double
+        self.temperature =
+            getTemperatureBasedOnSetting(celsius: json["temp"].double ?? 0.0) 
         self.weatherIcon = json["weather"]["icon"].string
     }
     

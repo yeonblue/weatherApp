@@ -28,7 +28,8 @@ class MainWeatherTableViewCell: UITableViewCell {
         cityLabel.adjustsFontSizeToFitWidth = true
         
         // TODO: 폰트 dynamic 처리
-        temperatureLabel.text = String(format: "%.0f %@", cityInfo.temperature!, " C")
+        temperatureLabel.text =
+            String(format: "%.0f", cityInfo.temperature!) + returnTemperatureFormatFromUserDefaults()
         temperatureLabel.adjustsFontSizeToFitWidth = true
     }
 
